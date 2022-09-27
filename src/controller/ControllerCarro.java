@@ -6,7 +6,7 @@ package controller;
 
 /**
  *
- * @author lucas
+ * @author Lucas de Liz, Matheus Maas
  */
 public class ControllerCarro {
     

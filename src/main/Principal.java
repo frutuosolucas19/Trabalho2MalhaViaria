@@ -4,17 +4,17 @@
  */
 package main;
 
-import view.viewMenuMalha;
+import view.MenuMalha;
 
 /**
  *
- * @author matheus
+ * @author Lucas de Liz, Matheus Maas
  */
 public class Principal {
 
   
     public static void main(String[] args) {
-        viewMenuMalha viewmenumalha = new viewMenuMalha();
+        MenuMalha viewmenumalha = new MenuMalha();
         
         viewmenumalha.setVisible(true);
     }

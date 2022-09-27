@@ -4,16 +4,24 @@
  */
 package view;
 
+import controller.ControllerCriacaoMalha;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
- * @author matheus
+ * @author Lucas de Liz, Matheus Maas
  */
-public class viewMenuMalha extends javax.swing.JFrame {
+public class MenuMalha extends javax.swing.JFrame {
+
+    private SimuladorMalha viewSimuladorMalha;
+    private ControllerCriacaoMalha criarMalha;
 
     /**
      * Creates new form viewMenuMalha
      */
-    public viewMenuMalha() {
+    public MenuMalha() {
         initComponents();
     }
 
@@ -41,12 +49,27 @@ public class viewMenuMalha extends javax.swing.JFrame {
 
         jButtonMalha1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButtonMalha1.setText("Malha 1");
+        jButtonMalha1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMalha1ActionPerformed(evt);
+            }
+        });
 
         jButtonMalha2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButtonMalha2.setText("Malha 2");
+        jButtonMalha2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMalha2ActionPerformed(evt);
+            }
+        });
 
         jButtonMalha3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButtonMalha3.setText("Malha 3");
+        jButtonMalha3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMalha3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -92,40 +115,42 @@ public class viewMenuMalha extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void jButtonMalha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMalha1ActionPerformed
+        this.setVisible(false);
+        criarMalha = ControllerCriacaoMalha.getInstance();
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(viewMenuMalha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(viewMenuMalha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(viewMenuMalha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(viewMenuMalha.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            criarMalha.setCaminhoMalha("src/exemplosMalhas/malha-exemplo-1.txt");
+            viewSimuladorMalha = new SimuladorMalha();
+            viewSimuladorMalha.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MenuMalha.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_jButtonMalha1ActionPerformed
 
-        /* Create and display the form */
-        /*java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new viewMenuMalha().setVisible(true);
-            }
-        }); */
-    }
+    private void jButtonMalha2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMalha2ActionPerformed
+        this.setVisible(false);
+        criarMalha = ControllerCriacaoMalha.getInstance();
+        try {
+            criarMalha.setCaminhoMalha("src/exemplosMalhas/malha-exemplo-2.txt");
+            viewSimuladorMalha = new SimuladorMalha();
+            viewSimuladorMalha.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MenuMalha.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonMalha2ActionPerformed
+
+    private void jButtonMalha3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMalha3ActionPerformed
+        this.setVisible(false);
+        criarMalha = ControllerCriacaoMalha.getInstance();
+        try {
+            criarMalha.setCaminhoMalha("src/exemplosMalhas/malha-exemplo-3.txt");
+            viewSimuladorMalha = new SimuladorMalha();
+            viewSimuladorMalha.setVisible(true);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MenuMalha.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonMalha3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonMalha1;

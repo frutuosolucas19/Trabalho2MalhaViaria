@@ -91,6 +91,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Malha 1"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMalha1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonMalha2">
           <Properties>
@@ -99,6 +102,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Malha 2"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMalha2ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonMalha3">
           <Properties>
@@ -107,6 +113,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Malha 3"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonMalha3ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
