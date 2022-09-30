@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import model.MalhaViaria;
-import utils.IconCelulaTabela;
+import utils.TableCellRendererImage;
 
 /**
  *
@@ -22,9 +22,14 @@ public class SimuladorMalha extends javax.swing.JFrame {
 
     private MalhaViaria malhaViaria = MalhaViaria.getInstance();
     private ControllerCriacaoMalha conCriacaoMalha;
-    private ImageIcon areaVerde = new ImageIcon("./imagens/areia.png");
+    private ImageIcon areia = new ImageIcon("./imagens/areia.png");
     private ImageIcon asfalto = new ImageIcon("./imagens/asfalto.png");
-   
+    private ImageIcon setaDireita = new ImageIcon("./imagens/direita.png");
+    private ImageIcon setaEsquerda = new ImageIcon("./imagens/esquerda.png");
+    private ImageIcon setaCima = new ImageIcon("./imagens/cima.png");
+    private ImageIcon setaBaixo = new ImageIcon("./imagens/baixo.png");
+    
+    
     /**
      * Creates new form viewSimuladorMalha
      */
@@ -44,19 +49,26 @@ public class SimuladorMalha extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelPrincipal = new javax.swing.JPanel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jButtonIniciar = new javax.swing.JButton();
+        jButtonVoltar = new javax.swing.JButton();
         jButtonEncerrar = new javax.swing.JButton();
         jTextFieldQtdMaxima = new javax.swing.JTextField();
         jLabelQtdMaxima = new javax.swing.JLabel();
+        jButtonIniciar = new javax.swing.JButton();
         jTableMalha = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Simulador de Trânsito");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanelPrincipal.setBackground(new java.awt.Color(242, 242, 242));
 
-        jButtonIniciar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButtonIniciar.setText("Iniciar");
+        jButtonVoltar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
 
         jButtonEncerrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonEncerrar.setText("Encerrar");
@@ -69,6 +81,9 @@ public class SimuladorMalha extends javax.swing.JFrame {
         jLabelQtdMaxima.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelQtdMaxima.setText("Quantidade Máxima de Carros:");
 
+        jButtonIniciar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButtonIniciar.setText("Iniciar");
+
         javax.swing.GroupLayout jPanelPrincipalLayout = new javax.swing.GroupLayout(jPanelPrincipal);
         jPanelPrincipal.setLayout(jPanelPrincipalLayout);
         jPanelPrincipalLayout.setHorizontalGroup(
@@ -78,24 +93,24 @@ public class SimuladorMalha extends javax.swing.JFrame {
                 .addComponent(jLabelQtdMaxima)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldQtdMaxima, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addComponent(jButtonIniciar)
-                .addGap(27, 27, 27)
+                .addGap(15, 15, 15)
+                .addComponent(jButtonVoltar)
+                .addGap(15, 15, 15)
                 .addComponent(jButtonEncerrar)
-                .addGap(21, 21, 21))
-            .addComponent(jSeparator1)
+                .addContainerGap())
         );
         jPanelPrincipalLayout.setVerticalGroup(
             jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelPrincipalLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(5, 5, 5)
                 .addGroup(jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldQtdMaxima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelQtdMaxima)
-                    .addComponent(jButtonIniciar)
-                    .addComponent(jButtonEncerrar))
-                .addGap(9, 9, 9)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonVoltar)
+                    .addComponent(jButtonEncerrar)
+                    .addComponent(jButtonIniciar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -118,19 +133,19 @@ public class SimuladorMalha extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTableMalha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTableMalha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(530, Short.MAX_VALUE))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
 
         pack();
@@ -139,6 +154,12 @@ public class SimuladorMalha extends javax.swing.JFrame {
     private void jButtonEncerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncerrarActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButtonEncerrarActionPerformed
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        this.setVisible(false);
+        MenuMalha menuMalha = new MenuMalha();
+        menuMalha.setVisible(true);
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     public void gerarTabelaMalha(int[][] matriz, int linha, int coluna) {
         
@@ -172,8 +193,9 @@ public class SimuladorMalha extends javax.swing.JFrame {
         jTableMalha.setIntercellSpacing(new Dimension(0, 0));
         jTableMalha.setRowHeight(30);
         jTableMalha.setModel(tipoTabela);
-        jTableMalha.setDefaultRenderer(Object.class, new IconCelulaTabela());
+        jTableMalha.setDefaultRenderer(Object.class, new TableCellRendererImage());
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        
         for (int i = 0; i < jTableMalha.getColumnModel().getColumnCount(); i++) {
             TableColumn column = jTableMalha.getColumnModel().getColumn(i);
             column.setHeaderRenderer(renderer);
@@ -183,24 +205,29 @@ public class SimuladorMalha extends javax.swing.JFrame {
     
      public ImageIcon colocarIcon(int fila, int coluna, int matriz[][]) {
         if (matriz[fila][coluna] == 0) {
-            return areaVerde;
-        }// else {
-            //return controleMapa.Estrada(fila, coluna);
-       // }
-        else if(matriz[fila][coluna] != 0){
+            return areia;
+        }
+        else if(matriz[fila][coluna] != 1 && matriz[fila][coluna] != 2 && matriz[fila][coluna] != 3 && matriz[fila][coluna] != 4){
             return asfalto;
+        }else if(matriz[fila][coluna] == 1){
+            return setaCima;
+        }else if(matriz[fila][coluna] == 2){
+            return setaDireita;
+        }else if(matriz[fila][coluna] == 3){
+            return setaBaixo;
+        }else if(matriz[fila][coluna] == 4){
+            return setaEsquerda;
         }
         return null;
-
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEncerrar;
     private javax.swing.JButton jButtonIniciar;
+    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabelQtdMaxima;
     private javax.swing.JPanel jPanelPrincipal;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTableMalha;
     private javax.swing.JTextField jTextFieldQtdMaxima;
     // End of variables declaration//GEN-END:variables
