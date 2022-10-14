@@ -8,18 +8,12 @@ package model;
 public class MalhaViaria {
     private int linha;
     private int coluna;
-    private static MalhaViaria instance = null; //Singleton
-
-    private MalhaViaria() {
-    }
+    private int matriz[][];
     
-    public synchronized static MalhaViaria getInstance(){
-        if(instance == null){
-            instance = new MalhaViaria();
-        }
-        
-        return instance;
+    public MalhaViaria(){
     }
+
+   
 
     public int getLinha() {
         return linha;
@@ -36,5 +30,15 @@ public class MalhaViaria {
     public void setColuna(int coluna) {
         this.coluna = coluna;
     }
+
+    public int[][] getMatriz() {
+        return matriz;
+    }
+
+    public void setMatriz(int[][] matriz) {
+        this.matriz = matriz;
+    }
+    
+    
 
 }

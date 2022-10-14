@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package view;
 
 import controller.ControllerCriacaoMalha;
@@ -204,7 +201,7 @@ public class MenuMalha extends javax.swing.JFrame {
 
     private void jButtonMalha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMalha1ActionPerformed
         this.setVisible(false);
-        criarMalha = ControllerCriacaoMalha.getInstance();
+        criarMalha = new ControllerCriacaoMalha();
         try {
             criarMalha.setCaminhoMalha("src/exemplosMalhas/malha-exemplo-1.txt");
             viewSimuladorMalha = new SimuladorMalha();
@@ -217,7 +214,7 @@ public class MenuMalha extends javax.swing.JFrame {
 
     private void jButtonMalha2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMalha2ActionPerformed
         this.setVisible(false);
-        criarMalha = ControllerCriacaoMalha.getInstance();
+        criarMalha = new ControllerCriacaoMalha();
         try {
             criarMalha.setCaminhoMalha("src/exemplosMalhas/malha-exemplo-2.txt");
             viewSimuladorMalha = new SimuladorMalha();
@@ -230,7 +227,7 @@ public class MenuMalha extends javax.swing.JFrame {
 
     private void jButtonMalha3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMalha3ActionPerformed
         this.setVisible(false);
-        criarMalha = ControllerCriacaoMalha.getInstance();
+        criarMalha = new ControllerCriacaoMalha();
         try {
             criarMalha.setCaminhoMalha("src/exemplosMalhas/malha-exemplo-3.txt");
             viewSimuladorMalha = new SimuladorMalha();
@@ -259,7 +256,7 @@ public class MenuMalha extends javax.swing.JFrame {
 
     private void jButtonIniciarSimuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarSimuActionPerformed
         this.setVisible(false);
-        criarMalha = ControllerCriacaoMalha.getInstance();
+        criarMalha = new ControllerCriacaoMalha();
         try {
             criarMalha.setCaminhoMalha(jTextFieldDiretorio.getText());
             viewSimuladorMalha = new SimuladorMalha();

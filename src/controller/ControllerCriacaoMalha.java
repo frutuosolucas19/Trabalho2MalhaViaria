@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package controller;
 
 import java.io.File;
@@ -9,7 +6,6 @@ import java.io.FileNotFoundException;
 import javax.swing.JOptionPane;
 import model.MalhaViaria;
 import utils.ScannerTxt;
-import view.SimuladorMalha;
 
 /**
  *
@@ -20,28 +16,22 @@ public class ControllerCriacaoMalha {
     private File blocoNotas;
     private ScannerTxt scanner;
     private int matriz[][];
-    private MalhaViaria malhaViaria;
-    static int linhas;
-    static int colunas;
-    private static ControllerCriacaoMalha instance = null; //Singleton
-
-    private ControllerCriacaoMalha() {
+    private static MalhaViaria malhaViaria;
+    
+    
+    public ControllerCriacaoMalha() {
     }
     
-    public synchronized static ControllerCriacaoMalha getInstance(){
-        if (instance == null) {
-            instance = new ControllerCriacaoMalha();
-        }
-        return instance;
+ 
+    public MalhaViaria getMalhaViaria() {
+        return malhaViaria;
     }
 
-    public int[][] getMatriz() {
-        return matriz;
+    public void setMalhaViaria(MalhaViaria malhaViaria) {
+        this.malhaViaria = malhaViaria;
     }
-
-    public void setMatriz(int[][] matriz) {
-        this.matriz = matriz;
-    }
+    
+    
 
     public void setCaminhoMalha(String caminho) throws FileNotFoundException {
         this.blocoNotas = new File(caminho);
@@ -50,19 +40,29 @@ public class ControllerCriacaoMalha {
             System.exit(0);
         }
         System.out.println(blocoNotas);
-        criarMalha();
+        criarMalha(blocoNotas);
     }
 
-    public void criarMalha() throws FileNotFoundException {
+    public void criarMalha(File blocoNotas) throws FileNotFoundException {
+        
+        
         scanner = new ScannerTxt();
         matriz = scanner.scanearTxt(blocoNotas);
-
-         linhas = matriz.length;
-         colunas = matriz[0].length;
+        malhaViaria = new MalhaViaria();
+        malhaViaria.setMatriz(matriz);
+        malhaViaria.setLinha(matriz.length);
+        malhaViaria.setColuna(matriz[0].length);
+        //imprimirMatriz();
         
-        malhaViaria = MalhaViaria.getInstance();
-        malhaViaria.setLinha(linhas);
-        malhaViaria.setColuna(colunas);      
     }
 
+    
+    public void imprimirMatriz(){
+        for (int i = 0; i < malhaViaria.getLinha(); i++) {
+            for (int j = 0; j < malhaViaria.getColuna(); j++) {
+                System.out.print(malhaViaria.getMatriz()[i][j]);
+            }
+            System.out.println();
+        }
+    }
 }

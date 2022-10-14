@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package view;
 
 import controller.ControllerCriacaoMalha;
@@ -11,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import model.Estrada;
 import model.MalhaViaria;
 import utils.TableCellRendererImage;
 
@@ -20,23 +18,31 @@ import utils.TableCellRendererImage;
  */
 public class SimuladorMalha extends javax.swing.JFrame {
 
-    private MalhaViaria malhaViaria = MalhaViaria.getInstance();
-    private ControllerCriacaoMalha conCriacaoMalha;
-    private ImageIcon areia = new ImageIcon("./imagens/areia.png");
-    private ImageIcon asfalto = new ImageIcon("./imagens/asfalto.png");
-    private ImageIcon setaDireita = new ImageIcon("./imagens/direita.png");
-    private ImageIcon setaEsquerda = new ImageIcon("./imagens/esquerda.png");
-    private ImageIcon setaCima = new ImageIcon("./imagens/cima.png");
-    private ImageIcon setaBaixo = new ImageIcon("./imagens/baixo.png");
+    private  static MalhaViaria malhaViaria = new MalhaViaria();
+    private  static ControllerCriacaoMalha controllerCriacaoMalha = new ControllerCriacaoMalha();
+    private final ImageIcon areia = new ImageIcon("./imagens/areia.png");
+    private final ImageIcon asfalto = new ImageIcon("./imagens/asfalto.png");
+    private final ImageIcon setaDireita = new ImageIcon("./imagens/direita.png");
+    private final ImageIcon setaEsquerda = new ImageIcon("./imagens/esquerda.png");
+    private final ImageIcon setaCima = new ImageIcon("./imagens/cima.png");
+    private final ImageIcon setaBaixo = new ImageIcon("./imagens/baixo.png");
+    private final ImageIcon carroVermelho = new ImageIcon("./imagens/carrovermelho1.png");
     
-    
+   
+
     /**
-     * Creates new form viewSimuladorMalha
+     * Creates new form viewSimuladorMalha 
      */
+
     public SimuladorMalha() {
         initComponents();
-        conCriacaoMalha = ControllerCriacaoMalha.getInstance();
-        gerarTabelaMalha(conCriacaoMalha.getMatriz(), malhaViaria.getLinha(), malhaViaria.getColuna());
+        malhaViaria = controllerCriacaoMalha.getMalhaViaria();
+        gerarTabelaMalha(malhaViaria.getMatriz(), malhaViaria.getLinha(), 
+         malhaViaria.getColuna());
+
+        
+        Estrada.matrizEstrada();
+        
     }
 
     /**
@@ -83,6 +89,11 @@ public class SimuladorMalha extends javax.swing.JFrame {
 
         jButtonIniciar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButtonIniciar.setText("Iniciar");
+        jButtonIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIniciarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelPrincipalLayout = new javax.swing.GroupLayout(jPanelPrincipal);
         jPanelPrincipal.setLayout(jPanelPrincipalLayout);
@@ -159,11 +170,20 @@ public class SimuladorMalha extends javax.swing.JFrame {
         this.setVisible(false);
         MenuMalha menuMalha = new MenuMalha();
         menuMalha.setVisible(true);
+
     }//GEN-LAST:event_jButtonVoltarActionPerformed
 
+    private void jButtonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarActionPerformed
+        if ((jTextFieldQtdMaxima.getText().isEmpty()) || !jTextFieldQtdMaxima.getText().matches("^[0-9]*$")) {
+            JOptionPane.showMessageDialog(rootPane, "Somente Números Inteiros!");
+            jTextFieldQtdMaxima.setText("");
+        } else {
+            System.out.println("Começando simulação");
+        }
+    }//GEN-LAST:event_jButtonIniciarActionPerformed
+
     public void gerarTabelaMalha(int[][] matriz, int linha, int coluna) {
-        
-        
+
         DefaultTableModel tipoTabela = new DefaultTableModel() {
 
             @Override
@@ -179,7 +199,7 @@ public class SimuladorMalha extends javax.swing.JFrame {
             @Override
             public Object getValueAt(int Filai, int colunaI) {
                 try {
-                    return colocarIcon(Filai, colunaI, conCriacaoMalha.getMatriz());
+                    return colocarIcon(Filai, colunaI, matriz);
 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e.toString());
@@ -195,32 +215,46 @@ public class SimuladorMalha extends javax.swing.JFrame {
         jTableMalha.setModel(tipoTabela);
         jTableMalha.setDefaultRenderer(Object.class, new TableCellRendererImage());
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-        
+
         for (int i = 0; i < jTableMalha.getColumnModel().getColumnCount(); i++) {
             TableColumn column = jTableMalha.getColumnModel().getColumn(i);
             column.setHeaderRenderer(renderer);
             column.setPreferredWidth(30);
         }
+        
     }
-    
-     public ImageIcon colocarIcon(int fila, int coluna, int matriz[][]) {
-        if (matriz[fila][coluna] == 0) {
+
+    public ImageIcon colocarIcon(int linha, int coluna, int matriz[][]) {
+        if (matriz[linha][coluna] == 0) {
             return areia;
-        }
-        else if(matriz[fila][coluna] != 1 && matriz[fila][coluna] != 2 && matriz[fila][coluna] != 3 && matriz[fila][coluna] != 4){
+        } else if (matriz[linha][coluna] == 5 || matriz[linha][coluna] == 6 || matriz[linha][coluna] == 7 || matriz[linha][coluna] == 8
+                || matriz[linha][coluna] == 9 || matriz[linha][coluna] == 10 || matriz[linha][coluna] == 11 || matriz[linha][coluna] == 12) {
             return asfalto;
-        }else if(matriz[fila][coluna] == 1){
+        } else if (matriz[linha][coluna] == 1) {
             return setaCima;
-        }else if(matriz[fila][coluna] == 2){
+        } else if (matriz[linha][coluna] == 2) {
             return setaDireita;
-        }else if(matriz[fila][coluna] == 3){
+        } else if (matriz[linha][coluna] == 3) {
             return setaBaixo;
-        }else if(matriz[fila][coluna] == 4){
+        } else if (matriz[linha][coluna] == 4) {
             return setaEsquerda;
+        } else if (matriz[linha][coluna] == 20) {
+            return carroVermelho;
         }
         return null;
     }
 
+    public ImageIcon colocarCarro(int fila, int coluna, int matriz[][]) {
+        if (matriz[fila][coluna] == 2) {
+            return carroVermelho;
+        }
+        return null;
+    }
+
+     public void atualizarSimulador(int posicaoCarro){
+       jTableMalha.repaint();
+      //((AbstractTableModel) jTableMalha.getModel()).setValueAt(carroVermelho,0 ,8);
+     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEncerrar;
