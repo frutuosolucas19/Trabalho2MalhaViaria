@@ -1,7 +1,7 @@
 
 package view;
 
-import controller.ControllerCriacaoMalha;
+import controller.ControllerMalha;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import model.MalhaViaria;
 
 /**
  *
@@ -17,13 +18,22 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class MenuMalha extends javax.swing.JFrame {
 
-    private SimuladorMalha viewSimuladorMalha;
-    private ControllerCriacaoMalha criarMalha;
+    private static SimuladorMalha viewSimuladorMalha;
+    private ControllerMalha criarMalha;
+    private static MenuMalha instance = null;
 
     /**
      * Creates new form viewMenuMalha
      */
-    public MenuMalha() {
+    //Singleton
+    public static MenuMalha getInstance() {
+        if (instance == null) {
+            instance = new MenuMalha();
+        }
+        return instance;
+    }
+    
+    private MenuMalha() {
         initComponents();
     }
 
@@ -201,10 +211,10 @@ public class MenuMalha extends javax.swing.JFrame {
 
     private void jButtonMalha1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMalha1ActionPerformed
         this.setVisible(false);
-        criarMalha = new ControllerCriacaoMalha();
+        criarMalha = new ControllerMalha(MalhaViaria.getInstance());
         try {
             criarMalha.setCaminhoMalha("src/exemplosMalhas/malha-exemplo-1.txt");
-            viewSimuladorMalha = new SimuladorMalha();
+            viewSimuladorMalha = SimuladorMalha.getInstance();
             viewSimuladorMalha.setExtendedState(JFrame.MAXIMIZED_BOTH);
             viewSimuladorMalha.setVisible(true);
         } catch (FileNotFoundException ex) {
@@ -214,10 +224,10 @@ public class MenuMalha extends javax.swing.JFrame {
 
     private void jButtonMalha2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMalha2ActionPerformed
         this.setVisible(false);
-        criarMalha = new ControllerCriacaoMalha();
+        criarMalha = new ControllerMalha(MalhaViaria.getInstance());
         try {
             criarMalha.setCaminhoMalha("src/exemplosMalhas/malha-exemplo-2.txt");
-            viewSimuladorMalha = new SimuladorMalha();
+            viewSimuladorMalha = SimuladorMalha.getInstance();
             viewSimuladorMalha.setExtendedState(JFrame.MAXIMIZED_BOTH);
             viewSimuladorMalha.setVisible(true);
         } catch (FileNotFoundException ex) {
@@ -227,10 +237,10 @@ public class MenuMalha extends javax.swing.JFrame {
 
     private void jButtonMalha3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMalha3ActionPerformed
         this.setVisible(false);
-        criarMalha = new ControllerCriacaoMalha();
+        criarMalha = new ControllerMalha(MalhaViaria.getInstance());
         try {
             criarMalha.setCaminhoMalha("src/exemplosMalhas/malha-exemplo-3.txt");
-            viewSimuladorMalha = new SimuladorMalha();
+            viewSimuladorMalha = SimuladorMalha.getInstance();
             viewSimuladorMalha.setExtendedState(JFrame.MAXIMIZED_BOTH);
             viewSimuladorMalha.setVisible(true);
         } catch (FileNotFoundException ex) {
@@ -256,10 +266,10 @@ public class MenuMalha extends javax.swing.JFrame {
 
     private void jButtonIniciarSimuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarSimuActionPerformed
         this.setVisible(false);
-        criarMalha = new ControllerCriacaoMalha();
+        criarMalha = new ControllerMalha(MalhaViaria.getInstance());
         try {
             criarMalha.setCaminhoMalha(jTextFieldDiretorio.getText());
-            viewSimuladorMalha = new SimuladorMalha();
+            viewSimuladorMalha = SimuladorMalha.getInstance();
             viewSimuladorMalha.setExtendedState(JFrame.MAXIMIZED_BOTH);
             viewSimuladorMalha.setVisible(true);
         } catch (FileNotFoundException ex) {

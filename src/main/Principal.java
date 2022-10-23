@@ -14,9 +14,8 @@ public class Principal {
 
   
     public static void main(String[] args) {
-        MenuMalha viewmenumalha = new MenuMalha();
         
-        viewmenumalha.setVisible(true);
+        MenuMalha.getInstance().setVisible(true);
     }
     
 }

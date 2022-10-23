@@ -32,7 +32,7 @@ public class ScannerTxt {
         }catch(Exception e){
             e.printStackTrace();
         }
-        
+        scan.close();
         return matriz;
     }
 }

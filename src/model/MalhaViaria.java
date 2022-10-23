@@ -1,19 +1,28 @@
 
 package model;
 
+import controllerObserver.InterfaceMalha;
+import view.MenuMalha;
+
 /**
  *
  * @author Lucas de Liz, Matheus Maas
  */
-public class MalhaViaria {
+public class MalhaViaria{
     private int linha;
     private int coluna;
     private int matriz[][];
+    private static MalhaViaria instance = null;
     
-    public MalhaViaria(){
+    private MalhaViaria(){
     }
 
-   
+     public static MalhaViaria getInstance() {
+        if (instance == null) {
+            instance = new MalhaViaria();
+        }
+        return instance;
+    }
 
     public int getLinha() {
         return linha;

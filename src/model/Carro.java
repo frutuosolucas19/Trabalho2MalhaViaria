@@ -1,21 +1,31 @@
 
 package model;
 
+import controller.ControllerCarro;
+import controller.ControllerMalha;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Lucas de Liz, Matheus Maas
  */
-public class Carro {
+public class Carro{
     private int codigoCarro;
     private int posicaoAtual;
     private String imagemCarro;
+    private int carrosCriados = 0;
 
+    public Carro(){
+        
+    }
+    
     public Carro(int posicao){
         this.posicaoAtual = posicao;
     }
     
     public int getCodigoCarro() {
-        return codigoCarro;
+        return codigoCarro + 15;
     }
 
     public void setCodigoCarro(int codigoCarro) {

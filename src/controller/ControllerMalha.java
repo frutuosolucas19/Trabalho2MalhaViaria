@@ -1,37 +1,38 @@
 
 package controller;
 
+import controllerObserver.InterfaceMalha;
+import java.util.List;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import model.Carro;
 import model.MalhaViaria;
 import utils.ScannerTxt;
+import view.MenuMalha;
 
 /**
  *
  * @author Lucas de Liz, Matheus Maas
  */
-public class ControllerCriacaoMalha {
+public class ControllerMalha{
 
     private File blocoNotas;
     private ScannerTxt scanner;
     private int matriz[][];
     private static MalhaViaria malhaViaria;
+    private static List<InterfaceMalha> listaObserversMalha = listaObserversMalha = new ArrayList<>();;
+  
     
-    
-    public ControllerCriacaoMalha() {
+    public ControllerMalha(){
+        
     }
     
- 
-    public MalhaViaria getMalhaViaria() {
-        return malhaViaria;
-    }
-
-    public void setMalhaViaria(MalhaViaria malhaViaria) {
+    public ControllerMalha(MalhaViaria malhaViaria) {
         this.malhaViaria = malhaViaria;
     }
-    
-    
+     
 
     public void setCaminhoMalha(String caminho) throws FileNotFoundException {
         this.blocoNotas = new File(caminho);
@@ -48,14 +49,38 @@ public class ControllerCriacaoMalha {
         
         scanner = new ScannerTxt();
         matriz = scanner.scanearTxt(blocoNotas);
-        malhaViaria = new MalhaViaria();
         malhaViaria.setMatriz(matriz);
         malhaViaria.setLinha(matriz.length);
         malhaViaria.setColuna(matriz[0].length);
-        //imprimirMatriz();
+        imprimirMatriz();
         
     }
+    
+    public void gerarMapa(){
+        notificarAtualizarMalha(MalhaViaria.getInstance().getMatriz(), MalhaViaria.getInstance().getLinha(), 
+                                MalhaViaria.getInstance().getColuna());
+    }
+    
 
+    public void atualizarMalha() {
+    }
+
+    //este método adiciona a view simuladormalha para ficar observando qualquer mudança
+     public void adicionarObserver(InterfaceMalha interObs) {
+        this.listaObserversMalha.add(interObs);
+    }
+     
+     public void notificarAtualizarMalha(int[][] matriz, int linha, int coluna){
+         for(InterfaceMalha interMalha : listaObserversMalha){
+             interMalha.gerarTabelaMalha(matriz, linha, coluna);
+         }
+     }
+     
+     public void notificarAtualizarTabela(int codCarro){
+         for(InterfaceMalha interMalha : listaObserversMalha){
+             interMalha.atualizarSimulador(codCarro);
+         }
+     }
     
     public void imprimirMatriz(){
         for (int i = 0; i < malhaViaria.getLinha(); i++) {

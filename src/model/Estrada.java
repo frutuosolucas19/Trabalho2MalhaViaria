@@ -1,51 +1,89 @@
 
 package model;
 
-import controller.ControllerCriacaoMalha;
+import controller.ControllerMalha;
+import view.MenuMalha;
 import view.SimuladorMalha;
 
 /**
  *
  * @author Lucas de Liz, Matheus Maas
  */
-public abstract class Estrada {
-    private static Carro carro;
+public class Estrada {
     
-    public static final int estradaCima = 1;
-    public static final int estradaDireita = 2;
-    public static final int estradaBaixo = 3;
-    public static final int estradaEsquerda = 4;
-    public static final int estradaCruzamentoCima = 5;
-    public static final int estradaCruzamentoDireita = 6;
-    public static final int estradaCruzamentoBaixo = 7;
-    public static final int estradaCruzamentoEsquerda = 8;
-    public static final int estradaCruzamentoCimaDireita = 9;
-    public static final int estradaCruzamentoCimaEsquerda = 10;
-    public static final int estradaCruzamentoDireitaBaixo = 11;
-    public static final int estradaCruzamentoBaixoEsquerda = 12;
-    public static Boolean status = true;
-    private static MalhaViaria malhaViaria;
-    private static SimuladorMalha simMalha;
-    private static ControllerCriacaoMalha conCriacaoMalha;
+    private final int estradaCima = 1;
+    private final int estradaDireita = 2;
+    private final int estradaBaixo = 3;
+    private final int estradaEsquerda = 4;
+    private final int estradaCruzamentoCima = 5;
+    private final int estradaCruzamentoDireita = 6;
+    private final int estradaCruzamentoBaixo = 7;
+    private final int estradaCruzamentoEsquerda = 8;
+    private final int estradaCruzamentoCimaDireita = 9;
+    private final int estradaCruzamentoCimaEsquerda = 10;
+    private final int estradaCruzamentoDireitaBaixo = 11;
+    private final int estradaCruzamentoBaixoEsquerda = 12;
+    private static Estrada instance = null;
     
-    //Este método tem por objetivo analisar a matriz e trazer as posições onde somente o carro pode andar
-    public static void matrizEstrada(){
-        carro = new Carro(1);
-        conCriacaoMalha = new ControllerCriacaoMalha();
-        malhaViaria = conCriacaoMalha.getMalhaViaria();
-        for (int i = 0; i < malhaViaria.getLinha(); i++) {
-            for (int j = 0; j < malhaViaria.getColuna(); j++) {
-                //System.out.print(malhaViaria.getMatriz()[i][j]);
-                if(malhaViaria.getMatriz()[i][j] == estradaDireita && status == true){
-                    carro = new Carro(20);
-                    malhaViaria.getMatriz()[i][j] = carro.getPosicaoAtual();
-                    simMalha = new SimuladorMalha();
-                    simMalha.atualizarSimulador(carro.getPosicaoAtual());
-                    status = false;
-                }
-            }
-            //System.out.println();
-        }
+    private Estrada(){
         
     }
+    
+    public static Estrada getInstance(){
+        if(instance == null){
+            instance = new Estrada();
+        }
+        return instance;
+    }
+
+    public int getEstradaCima() {
+        return estradaCima;
+    }
+
+    public int getEstradaDireita() {
+        return estradaDireita;
+    }
+
+    public int getEstradaBaixo() {
+        return estradaBaixo;
+    }
+
+    public int getEstradaEsquerda() {
+        return estradaEsquerda;
+    }
+
+    public int getEstradaCruzamentoCima() {
+        return estradaCruzamentoCima;
+    }
+
+    public int getEstradaCruzamentoDireita() {
+        return estradaCruzamentoDireita;
+    }
+
+    public int getEstradaCruzamentoBaixo() {
+        return estradaCruzamentoBaixo;
+    }
+
+    public int getEstradaCruzamentoEsquerda() {
+        return estradaCruzamentoEsquerda;
+    }
+
+    public int getEstradaCruzamentoCimaDireita() {
+        return estradaCruzamentoCimaDireita;
+    }
+
+    public int getEstradaCruzamentoCimaEsquerda() {
+        return estradaCruzamentoCimaEsquerda;
+    }
+
+    public int getEstradaCruzamentoDireitaBaixo() {
+        return estradaCruzamentoDireitaBaixo;
+    }
+
+    public int getEstradaCruzamentoBaixoEsquerda() {
+        return estradaCruzamentoBaixoEsquerda;
+    }
+   
+    
+    
 }
