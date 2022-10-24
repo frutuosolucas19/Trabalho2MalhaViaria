@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Carro;
 import model.MalhaViaria;
-import utils.ScannerTxt;
+import utils.ScannerMatriz;
 import view.MenuMalha;
 
 /**
@@ -19,7 +19,7 @@ import view.MenuMalha;
 public class ControllerMalha{
 
     private File blocoNotas;
-    private ScannerTxt scanner;
+    private ScannerMatriz scanner;
     private int matriz[][];
     private static MalhaViaria malhaViaria;
     private static List<InterfaceMalha> listaObserversMalha = listaObserversMalha = new ArrayList<>();;
@@ -47,7 +47,7 @@ public class ControllerMalha{
     public void criarMalha(File blocoNotas) throws FileNotFoundException {
         
         
-        scanner = new ScannerTxt();
+        scanner = new ScannerMatriz();
         matriz = scanner.scanearTxt(blocoNotas);
         malhaViaria.setMatriz(matriz);
         malhaViaria.setLinha(matriz.length);

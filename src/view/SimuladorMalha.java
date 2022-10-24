@@ -14,7 +14,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import model.MalhaViaria;
 import utils.TableCellRendererImage;
-
 /**
  *
  * @author Lucas de Liz, Matheus Maas
@@ -191,8 +190,7 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
         this.setVisible(false);
         instance = null;
         this.dispose();
-        conCarro.interrupt();
-        conCarro = null;
+        conCarro.setVelocidadeVeiculo(0);   
         criarMapa = true;
         MenuMalha.getInstance().setVisible(true);
     }//GEN-LAST:event_jButtonVoltarActionPerformed
@@ -207,7 +205,7 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
             jTextFieldQtdMaxima.setEditable(false);
             this.jButtonIniciar.setEnabled(false);
             try {
-                conCarro.criarCarro(Integer.parseInt(jTextFieldQtdMaxima.getText()));
+                conCarro.prepararCarro(Integer.parseInt(jTextFieldQtdMaxima.getText()));
 
             } catch (InterruptedException ex) {
                 Logger.getLogger(SimuladorMalha.class.getName()).log(Level.SEVERE, null, ex);
@@ -279,15 +277,12 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
             return setaBaixo;
         } else if (matriz[linha][coluna] == 4) {
             return setaEsquerda;
-        } //else if (matriz[linha][coluna] == 20) {
-        // return carroVerDireita;
-        // }
+        } 
 
         return null;
     }
 
     public ImageIcon colocarIcon(int linha, int coluna, int matriz[][], int posicao) {
-
         if (matriz[linha][coluna] == 0) {
             return areia;
         } else if (matriz[linha][coluna] == 5 || matriz[linha][coluna] == 6 || matriz[linha][coluna] == 7 || matriz[linha][coluna] == 8

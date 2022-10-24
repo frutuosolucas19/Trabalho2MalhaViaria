@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author Lucas de Liz, Matheus Maas
  */
-public class ScannerTxt {
+public class ScannerMatriz {
 
     private int matriz[][];
 
@@ -34,5 +34,30 @@ public class ScannerTxt {
         }
         scan.close();
         return matriz;
+    }
+    
+    public int[][] retornaMatriz(int[][] matriz) {
+    
+        int[][] matrizRetorno;
+        int linha = matriz.length;
+        int coluna = matriz[0].length;
+        matrizRetorno = new int[linha][coluna];
+
+        for (int i = 0; i < linha; i++) {
+            for (int j = 0; j < coluna; j++) {
+                matrizRetorno[i][j] = valorIndividualMatriz(matriz);
+            }
+        }
+        return matriz;
+    }
+    
+    public int valorIndividualMatriz(int[][] matriz){
+        int retorno;
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
+                return retorno = matriz[i][j];
+            }
+        }
+        return 0;
     }
 }

@@ -10,14 +10,15 @@ import java.util.logging.Logger;
  *
  * @author Lucas de Liz, Matheus Maas
  */
-public class Carro{
-    private int codigoCarro;
+public class Carro extends Thread {
+    private int codigoCarro = 15;
     private int posicaoAtual;
     private String imagemCarro;
     private int carrosCriados = 0;
+    private ControllerCarro conCarro = new ControllerCarro();
 
     public Carro(){
-        
+        this.setCodigoCarro(this.codigoCarro ++);
     }
     
     public Carro(int posicao){
@@ -49,5 +50,11 @@ public class Carro{
         this.imagemCarro = imagemCarro;
     }
     
+    @Override
+    public void run(){
+        System.out.println(this.toString());
+        conCarro.iniciarCarro(this.codigoCarro);
+       
+    }
     
 }
