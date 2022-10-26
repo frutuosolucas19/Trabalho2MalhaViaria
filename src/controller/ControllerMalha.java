@@ -22,11 +22,19 @@ public class ControllerMalha{
     private ScannerMatriz scanner;
     private int matriz[][];
     private static MalhaViaria malhaViaria;
-    private static List<InterfaceMalha> listaObserversMalha = listaObserversMalha = new ArrayList<>();;
-  
+    private static List<InterfaceMalha> listaObserversMalha = listaObserversMalha = new ArrayList<>();
+    private static ControllerMalha instance = null;
+    private int quantidadeCarros;
     
-    public ControllerMalha(){
+    private ControllerMalha(){
         
+    }
+    
+    public static ControllerMalha getInstance() {
+        if (instance == null) {
+            instance = new ControllerMalha();
+        }
+        return instance;
     }
     
     public ControllerMalha(MalhaViaria malhaViaria) {
@@ -62,8 +70,6 @@ public class ControllerMalha{
     }
     
 
-    public void atualizarMalha() {
-    }
 
     //este método adiciona a view simuladormalha para ficar observando qualquer mudança
      public void adicionarObserver(InterfaceMalha interObs) {
@@ -76,12 +82,30 @@ public class ControllerMalha{
          }
      }
      
-     public void notificarAtualizarTabela(int codCarro){
+     public void notificarAtualizarTabela(){
          for(InterfaceMalha interMalha : listaObserversMalha){
-             interMalha.atualizarSimulador(codCarro);
+             interMalha.atualizarSimulador();
          }
      }
+     
+      private void notificaQuantiCarros(int valor) {
+        for (InterfaceMalha interfaceMalha : listaObserversMalha) {
+            interfaceMalha.definirQuatCarros(valor);
+        }
+    }
     
+       public void definirCarros(int valor) {
+        this.quantidadeCarros = valor;
+        if (valor > 0) {
+            notificaQuantiCarros(valor);
+            return;
+        }
+    }
+       
+        public int getQuantiCarros() {
+        return quantidadeCarros;
+    }
+      
     public void imprimirMatriz(){
         for (int i = 0; i < malhaViaria.getLinha(); i++) {
             for (int j = 0; j < malhaViaria.getColuna(); j++) {

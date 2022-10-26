@@ -3,12 +3,14 @@ package utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Lucas de Liz, Matheus Maas
  */
-public class ScannerMatriz {
+public class ScannerTxt {
 
     private int matriz[][];
 
@@ -28,8 +30,7 @@ public class ScannerMatriz {
         }catch(Exception e){
             e.printStackTrace();
         }
-        scan.close();
+        
         return matriz;
     }
-    
 }

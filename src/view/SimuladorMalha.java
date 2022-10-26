@@ -5,8 +5,6 @@ import controller.ControllerMalha;
 import controller.ControllerEstrada;
 import controllerObserver.InterfaceMalha;
 import java.awt.Dimension;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -14,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import model.MalhaViaria;
 import utils.TableCellRendererImage;
+
 /**
  *
  * @author Lucas de Liz, Matheus Maas
@@ -22,9 +21,9 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
 
     private static SimuladorMalha instance = null;
     private static MalhaViaria malhaViaria = MalhaViaria.getInstance();
-    private static ControllerMalha controllerMalha = controllerMalha = new ControllerMalha();
-    private final static ControllerEstrada conEstrada = null;
-    private static ControllerCarro conCarro = new ControllerCarro();
+    private static ControllerMalha controllerMalha = controllerMalha = ControllerMalha.getInstance();
+    private static ControllerEstrada conEstrada = ControllerEstrada.getInstance();
+    private static ControllerCarro conCarro;
     private final ImageIcon areia = new ImageIcon("./imagens/areia.png");
     private final ImageIcon asfalto = new ImageIcon("./imagens/asfalto.png");
     private final ImageIcon setaDireita = new ImageIcon("./imagens/direita.png");
@@ -54,7 +53,7 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
     public static SimuladorMalha getInstance() {
         if (instance == null) {
             instance = new SimuladorMalha();
-            conCarro = new ControllerCarro();
+            conCarro = ControllerCarro.getInstance();
         }
         return instance;
     }
@@ -190,7 +189,7 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
         this.setVisible(false);
         instance = null;
         this.dispose();
-        conCarro.setVelocidadeVeiculo(0);   
+        conCarro.setVelocidadeVeiculo(0);
         criarMapa = true;
         MenuMalha.getInstance().setVisible(true);
     }//GEN-LAST:event_jButtonVoltarActionPerformed
@@ -204,12 +203,10 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
         } else {
             jTextFieldQtdMaxima.setEditable(false);
             this.jButtonIniciar.setEnabled(false);
-            try {
-                conCarro.prepararCarro(Integer.parseInt(jTextFieldQtdMaxima.getText()));
 
-            } catch (InterruptedException ex) {
-                Logger.getLogger(SimuladorMalha.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           // conCarro.prepararCarro(Integer.parseInt(jTextFieldQtdMaxima.getText()));
+           conEstrada.iniciar();
+              controllerMalha.definirCarros(Integer.parseInt(jTextFieldQtdMaxima.getText()));
         }
     }//GEN-LAST:event_jButtonIniciarActionPerformed
 
@@ -235,9 +232,9 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
                 try {
                     if (criarMapa == true) {
                         return colocarIcon(Filai, colunaI, matriz);
-                    } else if (criarMapa != true) {
+                    } /*else if (criarMapa != true) {
                         return colocarIcon(Filai, colunaI, matriz, codCarro);
-                    }
+                    }*/
 
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e.toString());
@@ -270,14 +267,14 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
                 || matriz[linha][coluna] == 9 || matriz[linha][coluna] == 10 || matriz[linha][coluna] == 11 || matriz[linha][coluna] == 12) {
             return asfalto;
         } else if (matriz[linha][coluna] == 1) {
-            return setaCima;
+            return asfalto;
         } else if (matriz[linha][coluna] == 2) {
-            return setaDireita;
+            return asfalto;
         } else if (matriz[linha][coluna] == 3) {
-            return setaBaixo;
+            return asfalto;
         } else if (matriz[linha][coluna] == 4) {
-            return setaEsquerda;
-        } 
+            return asfalto;
+        }
 
         return null;
     }
@@ -289,20 +286,20 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
                 || matriz[linha][coluna] == 9 || matriz[linha][coluna] == 10 || matriz[linha][coluna] == 11 || matriz[linha][coluna] == 12) {
             return asfalto;
         } else if (matriz[linha][coluna] == 1) {
-            return setaCima;
+            return asfalto;
         } else if (matriz[linha][coluna] == 2) {
-            return setaDireita;
+            return asfalto;
         } else if (matriz[linha][coluna] == 3) {
-            return setaBaixo;
+            return asfalto;
         } else if (matriz[linha][coluna] == 4) {
-            return setaEsquerda;
+            return asfalto;
         } else if (matriz[linha][coluna] == posicao && conCarro.retornaValorSentido(2) == 2 && "Direita".equals(conCarro.getSentidoEstrada())) {
             return carroVerDireita;
         } else if (matriz[linha][coluna] == posicao && conCarro.retornaValorSentido(4) == 4 && "Esquerda".equals(conCarro.getSentidoEstrada())) {
             return carroVerEsquerda;
-        }else if (matriz[linha][coluna] == posicao && conCarro.retornaValorSentido(3) == 3 && "Baixo".equals(conCarro.getSentidoEstrada())) {
+        } else if (matriz[linha][coluna] == posicao && conCarro.retornaValorSentido(3) == 3 && "Baixo".equals(conCarro.getSentidoEstrada())) {
             return carroVerBaixo;
-        }else if (matriz[linha][coluna] == posicao && conCarro.retornaValorSentido(1) == 1 && "Cima".equals(conCarro.getSentidoEstrada())) {
+        } else if (matriz[linha][coluna] == posicao && conCarro.retornaValorSentido(1) == 1 && "Cima".equals(conCarro.getSentidoEstrada())) {
             return carroVerCima;
         }
 
@@ -310,10 +307,15 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
     }
 
     @Override
-    public void atualizarSimulador(int codCarro) {
-        this.codCarro = codCarro;
-        criarMapa = false;
+    public void atualizarSimulador() {
+        //SimuladorMalha.codCarro = codCarro;
+        //criarMapa = false;
         jTableMalha.repaint();
+    }
+    
+     @Override
+    public void definirQuatCarros(int valor) {
+        jTextFieldQtdMaxima.setText("" + valor);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -14,7 +14,7 @@ public class MalhaViaria{
     private int matriz[][];
     private static MalhaViaria instance = null;
     
-    private MalhaViaria(){
+    public MalhaViaria(){
     }
 
      public static MalhaViaria getInstance() {
