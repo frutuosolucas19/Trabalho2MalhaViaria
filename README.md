@@ -8,6 +8,7 @@ Dupla: Lucas de Liz Frutuoso
 # Cenário
 
 Especificação dos Veículos
+![diagramaDeClasse](https://user-images.githubusercontent.com/44911079/198379746-0b224b71-7e7c-4323-a11a-639a0e474145.jpeg)
 
 a) Cada veículo deve ser um thread. ATENÇÃO: não utilizar ExecutorService para rodar asthreads.
 
@@ -62,6 +63,7 @@ ii) Saída: posição final da pista que está em uma das bordas da malha
 
 # Diagrama de Classes
 
-![Alt text](C:\Users\lucas\Downloads\diagramaDeClasse.jpeg "Title")
+![diagramaDeClasse](https://user-images.githubusercontent.com/44911079/198379800-9456d9b5-809a-4c37-9fb6-6230395c5fe6.jpeg)
+
 
 
