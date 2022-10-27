@@ -13,7 +13,7 @@ import model.Carro;
 public class CarroTeste extends Thread{
     private Carro car;
     private int contador;
-    private int velocidade = 300;
+    private int velocidade = 1000;
 
     public void setVelocidade(int velocidade) {
         this.velocidade = velocidade;

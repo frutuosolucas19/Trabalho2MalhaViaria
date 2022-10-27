@@ -16,12 +16,10 @@ public class ControllerCriacaoMalha {
     private ScannerTxt scanner;
     private int matriz[][];
     private static MalhaViaria malhaViaria;
-    
-    
+
     public ControllerCriacaoMalha() {
     }
-    
- 
+
     public MalhaViaria getMalhaViaria() {
         return malhaViaria;
     }
@@ -29,8 +27,6 @@ public class ControllerCriacaoMalha {
     public void setMalhaViaria(MalhaViaria malhaViaria) {
         this.malhaViaria = malhaViaria;
     }
-    
-    
 
     public void setCaminhoMalha(String caminho) throws FileNotFoundException {
         this.blocoNotas = new File(caminho);
@@ -43,8 +39,7 @@ public class ControllerCriacaoMalha {
     }
 
     public void criarMalha(File blocoNotas) throws FileNotFoundException {
-        
-        
+
         scanner = new ScannerTxt();
         matriz = scanner.scanearTxt(blocoNotas);
         malhaViaria = new MalhaViaria();
@@ -52,11 +47,10 @@ public class ControllerCriacaoMalha {
         malhaViaria.setLinha(matriz.length);
         malhaViaria.setColuna(matriz[0].length);
         //imprimirMatriz();
-        
+
     }
 
-    
-    public void imprimirMatriz(){
+    public void imprimirMatriz() {
         for (int i = 0; i < malhaViaria.getLinha(); i++) {
             for (int j = 0; j < malhaViaria.getColuna(); j++) {
                 System.out.print(malhaViaria.getMatriz()[i][j]);
