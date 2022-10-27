@@ -8,7 +8,6 @@ Dupla: Lucas de Liz Frutuoso
 # Cenário
 
 Especificação dos Veículos
-![diagramaDeClasse](https://user-images.githubusercontent.com/44911079/198379746-0b224b71-7e7c-4323-a11a-639a0e474145.jpeg)
 
 a) Cada veículo deve ser um thread. ATENÇÃO: não utilizar ExecutorService para rodar asthreads.
 
