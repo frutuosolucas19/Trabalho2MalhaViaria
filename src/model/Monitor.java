@@ -2,7 +2,7 @@ package model;
 
 /**
  *
- * @author lucas
+ * @author Lucas de Liz, Matheus Maas
  */
 public class Monitor extends Estrada {
 

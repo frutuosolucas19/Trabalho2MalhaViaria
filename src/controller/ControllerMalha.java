@@ -1,4 +1,3 @@
-
 package controller;
 
 import controllerObserver.InterfaceMalha;
@@ -14,7 +13,7 @@ import utils.ScannerMatriz;
  *
  * @author Lucas de Liz, Matheus Maas
  */
-public class ControllerMalha{
+public class ControllerMalha {
 
     private File blocoNotas;
     private ScannerMatriz scanner;
@@ -24,23 +23,22 @@ public class ControllerMalha{
     private static List<InterfaceMalha> listaObserversMalha = listaObserversMalha = new ArrayList<>();
     private static ControllerMalha instance = null;
     private int quantidadeCarros;
-    
-    private ControllerMalha(){
-        
+
+    private ControllerMalha() {
+
     }
-    
+
     public static ControllerMalha getInstance() {
         if (instance == null) {
             instance = new ControllerMalha();
-            
+
         }
         return instance;
     }
-    
+
     public ControllerMalha(MalhaViaria malhaViaria) {
         this.malhaViaria = malhaViaria;
     }
-     
 
     public void setCaminhoMalha(String caminho) throws FileNotFoundException {
         this.blocoNotas = new File(caminho);
@@ -53,7 +51,7 @@ public class ControllerMalha{
     }
 
     public void criarMalha(File blocoNotas) throws FileNotFoundException {
-        
+
         conEstrada = ControllerEstrada.getInstance();
         scanner = new ScannerMatriz();
         matriz = scanner.scanearTxt(blocoNotas);
@@ -63,49 +61,47 @@ public class ControllerMalha{
         imprimirMatriz();
         conEstrada.verificaEstrada();
     }
-    
-    public void gerarMapa(){
-        notificarAtualizarMalha(MalhaViaria.getInstance().getMatriz(), MalhaViaria.getInstance().getLinha(), 
-                                MalhaViaria.getInstance().getColuna());
-    }
-    
 
+    public void gerarMapa() {
+        notificarAtualizarMalha(MalhaViaria.getInstance().getMatriz(), MalhaViaria.getInstance().getLinha(),
+                MalhaViaria.getInstance().getColuna());
+    }
 
     //este método adiciona a view simuladormalha para ficar observando qualquer mudança
-     public void adicionarObserver(InterfaceMalha interObs) {
+    public void adicionarObserver(InterfaceMalha interObs) {
         this.listaObserversMalha.add(interObs);
     }
-     
-     public void notificarAtualizarMalha(int[][] matriz, int linha, int coluna){
-         for(InterfaceMalha interMalha : listaObserversMalha){
-             interMalha.gerarTabelaMalha(matriz, linha, coluna);
-         }
-     }
-     
-     public void notificarAtualizarTabela(){
-         for(InterfaceMalha interMalha : listaObserversMalha){
-             interMalha.atualizarSimulador();
-         }
-     }
-     
-      private void notificaQuantiCarros(int valor) {
-        for (InterfaceMalha interfaceMalha : listaObserversMalha) {
-            interfaceMalha.definirQuatCarros(valor);
+
+    public void notificarAtualizarMalha(int[][] matriz, int linha, int coluna) {
+        for (InterfaceMalha interMalha : listaObserversMalha) {
+            interMalha.gerarTabelaMalha(matriz, linha, coluna);
         }
     }
-    
-       public void definirCarros(int valor) {
+
+    public void notificarAtualizarTabela() {
+        for (InterfaceMalha interMalha : listaObserversMalha) {
+            interMalha.atualizarSimulador();
+        }
+    }
+
+    private void notificarQuantidadeCarros(int valor) {
+        for (InterfaceMalha interfaceMalha : listaObserversMalha) {
+            interfaceMalha.definirQuantidadeCarros(valor);
+        }
+    }
+
+    public void definirCarros(int valor) {
         this.quantidadeCarros = valor;
         if (valor > 0) {
-            notificaQuantiCarros(valor);
+            notificarQuantidadeCarros(valor);
         }
     }
-       
-        public int getQuantiCarros() {
+
+    public int getQuantidadeCarros() {
         return quantidadeCarros;
     }
-      
-    public void imprimirMatriz(){
+
+    public void imprimirMatriz() {
         for (int i = 0; i < malhaViaria.getLinha(); i++) {
             for (int j = 0; j < malhaViaria.getColuna(); j++) {
                 System.out.print(malhaViaria.getMatriz()[i][j]);

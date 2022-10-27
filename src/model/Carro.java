@@ -9,9 +9,8 @@ public class Carro {
     private int codigoCarro;
     private Estrada posicaoAtual;
     private Estrada posicaoVelha;
-    private String imagem;
-    private int proxSentido;
     private String imagemCarro;
+    private int proxSentido;
     private int velocidadeCarro;
 
     public Carro() {
@@ -21,7 +20,6 @@ public class Carro {
         this.codigoCarro = codCarro;
         this.posicaoAtual = estrada;
         this.proxSentido = 0;
-
     }
 
     public int getCodigoCarro() {
@@ -30,14 +28,6 @@ public class Carro {
 
     public void setCodigoCarro(int codigoCarro) {
         this.codigoCarro = codigoCarro;
-    }
-
-    public String getImagemCarro() {
-        return imagemCarro;
-    }
-
-    public void setImagemCarro(String imagemCarro) {
-        this.imagemCarro = imagemCarro;
     }
 
     public int getVelocidadeCarro() {
@@ -64,12 +54,12 @@ public class Carro {
         this.posicaoVelha = posicaoVelha;
     }
 
-    public String getImagem() {
-        return imagem;
+    public String getImagemCarro() {
+        return imagemCarro;
     }
 
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
+    public void setImagemCarro(String imagemCarro) {
+        this.imagemCarro = imagemCarro;
     }
 
     public int getProxSentido() {
@@ -83,16 +73,16 @@ public class Carro {
     public void definicaoImagem(int direcao) {
         switch (direcao) {
             case 1:
-                this.imagem = "./imagens/carrovermelhocima.png";
+                this.imagemCarro = "./imagens/carrovermelhocima.png";
                 break;
             case 2:
-                this.imagem = "./imagens/carrovermelhodireita.png";
+                this.imagemCarro = "./imagens/carrovermelhodireita.png";
                 break;
             case 3:
-                this.imagem = "./imagens/carrovermelhobaixo.png";
+                this.imagemCarro = "./imagens/carrovermelhobaixo.png";
                 break;
             case 4:
-                this.imagem = "./imagens/carrovermelhoesquerda.png";
+                this.imagemCarro = "./imagens/carrovermelhoesquerda.png";
                 break;
             default:
                 break;

@@ -8,5 +8,6 @@ public  interface InterfaceMalha {
     
     public void gerarTabelaMalha(int[][] matriz, int linha, int coluna);
     public void atualizarSimulador();
-    public void definirQuatCarros(int value);
+    public void definirQuantidadeCarros(int valor);
 }
+    

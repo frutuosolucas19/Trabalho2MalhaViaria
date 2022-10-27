@@ -1,20 +1,20 @@
-
 package model;
 
 /**
  *
  * @author Lucas de Liz, Matheus Maas
  */
-public class MalhaViaria{
+public class MalhaViaria {
+
     private int linha;
     private int coluna;
     private int matriz[][];
     private static MalhaViaria instance = null;
-    
-    public MalhaViaria(){
+
+    public MalhaViaria() {
     }
 
-     public static MalhaViaria getInstance() {
+    public static MalhaViaria getInstance() {
         if (instance == null) {
             instance = new MalhaViaria();
         }
@@ -44,7 +44,5 @@ public class MalhaViaria{
     public void setMatriz(int[][] matriz) {
         this.matriz = matriz;
     }
-    
-    
 
 }

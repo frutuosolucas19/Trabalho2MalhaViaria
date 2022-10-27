@@ -1,4 +1,3 @@
-
 package view;
 
 import controller.ControllerMalha;
@@ -32,7 +31,7 @@ public class MenuMalha extends javax.swing.JFrame {
         }
         return instance;
     }
-    
+
     private MenuMalha() {
         initComponents();
     }
@@ -256,8 +255,8 @@ public class MenuMalha extends javax.swing.JFrame {
         if (retorno == JFileChooser.APPROVE_OPTION) {
             String absolutePath = fileChooser.getSelectedFile().getAbsolutePath();
             try {
-               
-               jTextFieldDiretorio.setText(absolutePath);
+
+                jTextFieldDiretorio.setText(absolutePath);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }

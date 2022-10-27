@@ -17,8 +17,9 @@ public class ControllerEstrada {
 
     private static MalhaViaria malhaViaria = MalhaViaria.getInstance();
     private static Estrada matrizEstrada[][];
+    private static Random random = new Random();
     private static ControllerEstrada instance = null;
-    private static SpawnerTeste nascer;
+    private static ControllerSpawner nascer;
     private static int codigoCarro;
     private int velocidadeVeiculo;
 
@@ -34,11 +35,11 @@ public class ControllerEstrada {
     }
 
     public void iniciar() {
-        nascer = new SpawnerTeste();
+        nascer = new ControllerSpawner();
         nascer.start();
     }
 
-    public SpawnerTeste getSpawn() {
+    public ControllerSpawner getControllerSpawner() {
         return nascer;
     }
 
@@ -141,7 +142,6 @@ public class ControllerEstrada {
 
     public void nascerCarro() {
         List<Estrada> estradas = new ArrayList();
-        //imprimirMatriz();
         for (Estrada[] estradaLinha : matrizEstrada) {
             for (Estrada estrada : estradaLinha) {
                 if (estrada != null && Estrada.carroCriado) {
@@ -150,10 +150,8 @@ public class ControllerEstrada {
                 }
             }
         }
-        Random random = new Random(3);
-        imprimirMatriz();
-        int valor = random.nextInt(4) + 1;    
-        definirCarro(estradas.get(escolherBordaMatriz(valor)));
+
+        definirCarro(estradas.get(random.nextInt(estradas.size())));
     }
 
     public void definirCarro(Estrada estrada) {
@@ -164,8 +162,8 @@ public class ControllerEstrada {
         Carro carro = new Carro(codigoCarro++, estrada);
         definirCarroImagem(carro);
         definirVelocidadeCarro(velocidadeVeiculo);
-        CarroTeste driver = new CarroTeste(carro, this.velocidadeVeiculo);
-        driver.start();
+        ControllerCarro andar = new ControllerCarro(carro, this.velocidadeVeiculo);
+        andar.start();
         return carro;
     }
 
@@ -254,7 +252,7 @@ public class ControllerEstrada {
         if (matrizEstrada[linha][coluna].getCarro() == null) {
             return new ImageIcon("./imagens/asfalto.png");
         }
-        return new ImageIcon(matrizEstrada[linha][coluna].getCarro().getImagem());
+        return new ImageIcon(matrizEstrada[linha][coluna].getCarro().getImagemCarro());
     }
 
     public void imprimirMatriz() {
@@ -264,81 +262,5 @@ public class ControllerEstrada {
             }
             System.out.println();
         }
-    }
-
-    private int escolherBordaMatriz(int valor) {
-        int retorno = 0;
-        int j = 0;
-        int numeroAleatorioLinha = 0;
-        Random random = new Random();
-        
-        if(valor == 1){
-        for (int i = 0; i < matrizEstrada.length; i = numeroAleatorioLinha) {
-            if (matrizEstrada[i][j] != null) {
-                retorno = i;
-                return retorno;
-            }
-            numeroAleatorioLinha = random.nextInt(malhaViaria.getLinha());
-            for (j = 0; j < matrizEstrada[0].length; j++) {
-                if (matrizEstrada[i][j] != null) {
-                    retorno = i;
-                    return retorno;
-                }
-            }
-            j = j - 1;
-        }
-        }
-        
-        if(valor == 2){
-        for (int i = 0; i < matrizEstrada.length; i = numeroAleatorioLinha) {
-            if (matrizEstrada[i][j] != null) {
-                retorno = i;
-                return retorno;
-            }
-            numeroAleatorioLinha = random.nextInt(malhaViaria.getLinha());
-            for (j = 0; j < matrizEstrada[0].length; j++) {
-                if (matrizEstrada[i][j] != null) {
-                    retorno = i;
-                    return retorno;
-                }
-            }
-            j = j - 1;
-        }
-        }
-        
-        if(valor == 3){
-       for (int i = 0; i < matrizEstrada.length; i = numeroAleatorioLinha) {
-            if (matrizEstrada[i][j] != null) {
-                retorno = i;
-                return retorno;
-            }
-            numeroAleatorioLinha = random.nextInt(malhaViaria.getLinha());
-            for (j = 0; j < matrizEstrada[0].length; j++) {
-                if (matrizEstrada[i][j] != null) {
-                    retorno = i;
-                    return retorno;
-                }
-            }
-            j = j - 1;
-        }
-        }
-        
-        if(valor == 4){
-        for (int i = 0; i < matrizEstrada.length; i = numeroAleatorioLinha) {
-            if (matrizEstrada[i][j] != null) {
-                retorno = i;
-                return retorno;
-            }
-            numeroAleatorioLinha = random.nextInt(malhaViaria.getLinha());
-            for (j = 0; j < matrizEstrada[0].length; j++) {
-                if (matrizEstrada[i][j] != null) {
-                    retorno = i;
-                    return retorno;
-                }
-            }
-            j = j - 1;
-        }
-        }
-        return 0;
     }
 }

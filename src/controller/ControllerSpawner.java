@@ -8,16 +8,17 @@ import java.util.logging.Logger;
  *
  * @author Lucas de Liz, Matheus Maas
  */
-public class SpawnerTeste extends Thread{
+public class ControllerSpawner extends Thread {
+
     ControllerEstrada conEstrada = ControllerEstrada.getInstance();
     ControllerMalha conMalha = ControllerMalha.getInstance();
     private boolean on = true;
-    private int velocidade = 500;
+    private int velocidade = 300;
+    private int totalCarros = 0;
 
     public void setVelocidade(int velocidade) {
         this.velocidade = velocidade;
     }
-    private int totalCars = 0;
 
     public void removerCarro() {
 
@@ -31,14 +32,14 @@ public class SpawnerTeste extends Thread{
     public void run() {
         while (on) {
             try {
-                if (totalCars < conMalha.getQuantiCarros()) {
+                if (totalCarros < conMalha.getQuantidadeCarros()) {
                     conEstrada.nascerCarro();
-                    totalCars++;
+                    totalCarros++;
                     sleep(velocidade);
                 }
                 sleep(1);
             } catch (InterruptedException ex) {
-                Logger.getLogger(SpawnerTeste.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ControllerSpawner.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
