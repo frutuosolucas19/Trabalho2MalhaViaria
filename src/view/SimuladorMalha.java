@@ -1,6 +1,5 @@
 package view;
 
-import controller.ControllerCarro;
 import controller.ControllerMalha;
 import controller.ControllerEstrada;
 import controllerObserver.InterfaceMalha;
@@ -23,7 +22,6 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
     private static MalhaViaria malhaViaria = MalhaViaria.getInstance();
     private static ControllerMalha controllerMalha = controllerMalha = ControllerMalha.getInstance();
     private static ControllerEstrada conEstrada = ControllerEstrada.getInstance();
-    private static ControllerCarro conCarro;
     private final ImageIcon areia = new ImageIcon("./imagens/areia.png");
     private final ImageIcon asfalto = new ImageIcon("./imagens/asfalto.png");
     private final ImageIcon setaDireita = new ImageIcon("./imagens/direita.png");
@@ -34,14 +32,7 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
     private final ImageIcon carroVerEsquerda = new ImageIcon("./imagens/carrovermelhoesquerda.png");
     private final ImageIcon carroVerBaixo = new ImageIcon("./imagens/carrovermelhobaixo.png");
     private final ImageIcon carroVerCima = new ImageIcon("./imagens/carrovermelhocima.png");
-    private final ImageIcon carroAzuDireita = new ImageIcon("./imagens/carroazuldireita.png");
-    private final ImageIcon carroAzuEsquerda = new ImageIcon("./imagens/carroazulesquerda.png");
-    private final ImageIcon carroAzuBaixo = new ImageIcon("./imagens/carroazulbaixo.png");
-    private final ImageIcon carroAzuCima = new ImageIcon("./imagens/carroazulcima.png");
-    private final ImageIcon carroAmaDireita = new ImageIcon("./imagens/carroamarelodireita.png");
-    private final ImageIcon carroAmaEsquerda = new ImageIcon("./imagens/carroamareloesquerdo.png");
-    private final ImageIcon carroAmaBaixo = new ImageIcon("./imagens/carroamarelobaixo.png");
-    private final ImageIcon carroAmaCima = new ImageIcon("./imagens/carroamarelocima.png");
+    
     private static Boolean criarMapa;
     private static int codCarro;
 
@@ -53,7 +44,7 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
     public static SimuladorMalha getInstance() {
         if (instance == null) {
             instance = new SimuladorMalha();
-            conCarro = ControllerCarro.getInstance();
+           
         }
         return instance;
     }
@@ -189,7 +180,6 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
         this.setVisible(false);
         instance = null;
         this.dispose();
-        conCarro.setVelocidadeVeiculo(0);
         criarMapa = true;
         MenuMalha.getInstance().setVisible(true);
     }//GEN-LAST:event_jButtonVoltarActionPerformed
@@ -206,7 +196,7 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
 
            // conCarro.prepararCarro(Integer.parseInt(jTextFieldQtdMaxima.getText()));
            conEstrada.iniciar();
-              controllerMalha.definirCarros(Integer.parseInt(jTextFieldQtdMaxima.getText()));
+           controllerMalha.definirCarros(Integer.parseInt(jTextFieldQtdMaxima.getText()));
         }
     }//GEN-LAST:event_jButtonIniciarActionPerformed
 
@@ -230,9 +220,9 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
             @Override
             public Object getValueAt(int Filai, int colunaI) {
                 try {
-                    if (criarMapa == true) {
+                    
                         return colocarIcon(Filai, colunaI, matriz);
-                    } /*else if (criarMapa != true) {
+                     /*else if (criarMapa != true) {
                         return colocarIcon(Filai, colunaI, matriz, codCarro);
                     }*/
 
@@ -240,7 +230,6 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
                     JOptionPane.showMessageDialog(null, e.toString());
                     return null;
                 }
-                return null;
             }
         };
 
@@ -263,22 +252,12 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
     public ImageIcon colocarIcon(int linha, int coluna, int matriz[][]) {
         if (matriz[linha][coluna] == 0) {
             return areia;
-        } else if (matriz[linha][coluna] == 5 || matriz[linha][coluna] == 6 || matriz[linha][coluna] == 7 || matriz[linha][coluna] == 8
-                || matriz[linha][coluna] == 9 || matriz[linha][coluna] == 10 || matriz[linha][coluna] == 11 || matriz[linha][coluna] == 12) {
-            return asfalto;
-        } else if (matriz[linha][coluna] == 1) {
-            return asfalto;
-        } else if (matriz[linha][coluna] == 2) {
-            return asfalto;
-        } else if (matriz[linha][coluna] == 3) {
-            return asfalto;
-        } else if (matriz[linha][coluna] == 4) {
-            return asfalto;
+        } else if(matriz[linha][coluna] != 0){
+            return conEstrada.Estrada(linha, coluna);
         }
-
         return null;
     }
-
+/*
     public ImageIcon colocarIcon(int linha, int coluna, int matriz[][], int posicao) {
         if (matriz[linha][coluna] == 0) {
             return areia;
@@ -304,7 +283,7 @@ public class SimuladorMalha extends javax.swing.JFrame implements InterfaceMalha
         }
 
         return null;
-    }
+    }*/
 
     @Override
     public void atualizarSimulador() {

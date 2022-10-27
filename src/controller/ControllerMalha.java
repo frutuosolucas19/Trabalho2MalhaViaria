@@ -7,10 +7,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import model.Carro;
 import model.MalhaViaria;
 import utils.ScannerMatriz;
-import view.MenuMalha;
 
 /**
  *
@@ -22,6 +20,7 @@ public class ControllerMalha{
     private ScannerMatriz scanner;
     private int matriz[][];
     private static MalhaViaria malhaViaria;
+    private static ControllerEstrada conEstrada;
     private static List<InterfaceMalha> listaObserversMalha = listaObserversMalha = new ArrayList<>();
     private static ControllerMalha instance = null;
     private int quantidadeCarros;
@@ -33,6 +32,7 @@ public class ControllerMalha{
     public static ControllerMalha getInstance() {
         if (instance == null) {
             instance = new ControllerMalha();
+            
         }
         return instance;
     }
@@ -54,14 +54,14 @@ public class ControllerMalha{
 
     public void criarMalha(File blocoNotas) throws FileNotFoundException {
         
-        
+        conEstrada = ControllerEstrada.getInstance();
         scanner = new ScannerMatriz();
         matriz = scanner.scanearTxt(blocoNotas);
         malhaViaria.setMatriz(matriz);
         malhaViaria.setLinha(matriz.length);
         malhaViaria.setColuna(matriz[0].length);
         imprimirMatriz();
-        
+        conEstrada.verificaEstrada();
     }
     
     public void gerarMapa(){
@@ -98,7 +98,6 @@ public class ControllerMalha{
         this.quantidadeCarros = valor;
         if (valor > 0) {
             notificaQuantiCarros(valor);
-            return;
         }
     }
        

@@ -1,11 +1,7 @@
 
 package model;
 
-import controller.ControllerCarro;
-import controller.ControllerMalha;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -19,7 +15,6 @@ public class Carro  {
     private int proxSentido;
     private String imagemCarro;
     private int quantidadeCarros = 0;
-    private static ControllerCarro conCarro = ControllerCarro.getInstance();
     private int velocidadeCarro;
     private Random random = new Random();
 

@@ -1,10 +1,7 @@
 
 package model;
 
-import controller.ControllerMalha;
 import java.util.ArrayList;
-import view.MenuMalha;
-import view.SimuladorMalha;
 
 /**
  *
@@ -28,8 +25,8 @@ public class Estrada {
     private int sentido;
     private int x;
     private int y;
-    private Carro carro;
-    private Boolean carroCriado;
+    private static Carro carro;
+    public static Boolean carroCriado;
     private ArrayList<Estrada> proxEstrada;
     private boolean cruzamento;
     
@@ -127,6 +124,7 @@ public class Estrada {
         this.y = y;
     }
 
+  
     public Boolean getCarroCriado() {
         return carroCriado;
     }
@@ -158,10 +156,10 @@ public class Estrada {
     
     public void adicionarCarroEstrada(Carro carro) {
         try {
-            while (getCarro() != null) {
+            while (this.getCarro() != null) {
                 wait(carro.getVelocidadeCarro());
             }
-            setCarro(carro);
+            this.setCarro(carro);
         } 
         catch (Exception e) {
         }

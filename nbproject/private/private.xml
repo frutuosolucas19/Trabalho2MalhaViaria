@@ -2,6 +2,20 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Trabalho2MalhaViaria/src/controller/ControllerEstrada.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Trabalho2MalhaViaria/src/controller/CarroTeste.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Trabalho2MalhaViaria/src/model/Estrada.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Trabalho2MalhaViaria/src/model/Carro.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Trabalho2MalhaViaria/src/utils/ScannerMatriz.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Trabalho2MalhaViaria/src/model/MalhaViaria.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Trabalho2MalhaViaria/src/controller/ControllerCarro.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Trabalho2MalhaViaria/src/controllerObserver/InterfaceMalha.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Trabalho2MalhaViaria/src/controller/SpawnerTeste.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Trabalho2MalhaViaria/src/controller/ControllerMalha.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Trabalho2MalhaViaria/src/view/MenuMalha.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Trabalho2MalhaViaria/src/view/SimuladorMalha.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Trabalho2MalhaViaria/src/main/Principal.java</file>
+        </group>
     </open-files>
 </project-private>

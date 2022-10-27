@@ -13,14 +13,13 @@ import model.Carro;
 public class CarroTeste extends Thread{
     private Carro car;
     private int contador;
-    private int velocidade = 300;
+    private int velocidade = 1000;
 
     public void setVelocidade(int velocidade) {
         this.velocidade = velocidade;
     }
 
     ControllerMalha conMalha = ControllerMalha.getInstance();
-    ControllerCarro conCarro = ControllerCarro.getInstance();
     ControllerEstrada conEstrada = ControllerEstrada.getInstance();
 
     public CarroTeste(Carro car, int velocity) {
@@ -65,13 +64,13 @@ public class CarroTeste extends Thread{
                     this.car.setPosicaoVelha(this.car.getPosicaoAtual());
                     this.car.setPosicaoAtual(this.car.getPosicaoAtual().getProxEstrada().get(0));
                 }
-                conCarro.definirCarroImagem(car);
+                conEstrada.definirCarroImagem(car);
                 conMalha.notificarAtualizarTabela();
             }
 
             //Destroi o carro quando chega no fim
             sleep(velocidade);
-            conCarro.definirCarroImagem(car);
+            conEstrada.definirCarroImagem(car);
             this.car.getPosicaoAtual().removerCarro();
             conMalha.notificarAtualizarTabela();
             conEstrada.getSpawn().removerCarro();

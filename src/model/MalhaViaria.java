@@ -1,9 +1,6 @@
 
 package model;
 
-import controllerObserver.InterfaceMalha;
-import view.MenuMalha;
-
 /**
  *
  * @author Lucas de Liz, Matheus Maas
