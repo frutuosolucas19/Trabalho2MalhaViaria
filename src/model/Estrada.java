@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *
  * @author Lucas de Liz, Matheus Maas
  */
-public class Estrada {
+public abstract class Estrada {
     
     private final int estradaCima = 1;
     private final int estradaDireita = 2;
@@ -21,11 +21,10 @@ public class Estrada {
     private final int estradaCruzamentoCimaEsquerda = 10;
     private final int estradaCruzamentoDireitaBaixo = 11;
     private final int estradaCruzamentoBaixoEsquerda = 12;
-    private static Estrada instance = null;
     private int sentido;
     private int x;
     private int y;
-    private static Carro carro;
+    protected Carro carro;
     public static Boolean carroCriado;
     private ArrayList<Estrada> proxEstrada;
     private boolean cruzamento;
@@ -43,6 +42,9 @@ public class Estrada {
             this.cruzamento = true;
         }
     }
+    public abstract void adicionarCarro(Carro carro);
+    
+    public abstract void removerCarro();
 
     public int getEstradaCima() {
         return estradaCima;
@@ -153,19 +155,4 @@ public class Estrada {
         this.proxEstrada.add(estrada);
     }
     
-    
-    public void adicionarCarroEstrada(Carro carro) {
-        try {
-            while (this.getCarro() != null) {
-                wait(carro.getVelocidadeCarro());
-            }
-            this.setCarro(carro);
-        } 
-        catch (Exception e) {
-        }
-    }
-    
-    public void removerCarro() {
-        carro = null;
-    }
 }

@@ -1,36 +1,31 @@
-
 package model;
-
-import java.util.Random;
 
 /**
  *
  * @author Lucas de Liz, Matheus Maas
  */
-public class Carro  {
-    private int codigoCarro = 15;
+public class Carro {
+
+    private int codigoCarro;
     private Estrada posicaoAtual;
     private Estrada posicaoVelha;
     private String imagem;
     private int proxSentido;
     private String imagemCarro;
-    private int quantidadeCarros = 0;
     private int velocidadeCarro;
-    private Random random = new Random();
 
-    public Carro(){
-        this.setCodigoCarro(this.codigoCarro ++);
+    public Carro() {
     }
-    
-   public Carro(int codCarro, Estrada estrada) {
+
+    public Carro(int codCarro, Estrada estrada) {
         this.codigoCarro = codCarro;
         this.posicaoAtual = estrada;
         this.proxSentido = 0;
 
     }
-    
+
     public int getCodigoCarro() {
-        return codigoCarro + 15;
+        return codigoCarro;
     }
 
     public void setCodigoCarro(int codigoCarro) {
@@ -84,37 +79,25 @@ public class Carro  {
     public void setProxSentido(int proxSentido) {
         this.proxSentido = proxSentido;
     }
-    
-    
-    
+
     public void definicaoImagem(int direcao) {
-        if (direcao == 1) {
-            this.imagem = "./imagens/carrovermelhocima.png";
-        } else if(direcao == 2){
-            this.imagem = "./imagens/carrovermelhodireita.png";
-        }else if(direcao == 3){
-            this.imagem = "./imagens/carrovermelhobaixo.png";
-        }else if(direcao == 4){
-            this.imagem = "./imagens/carrovermelhoesquerda.png";
+        switch (direcao) {
+            case 1:
+                this.imagem = "./imagens/carrovermelhocima.png";
+                break;
+            case 2:
+                this.imagem = "./imagens/carrovermelhodireita.png";
+                break;
+            case 3:
+                this.imagem = "./imagens/carrovermelhobaixo.png";
+                break;
+            case 4:
+                this.imagem = "./imagens/carrovermelhoesquerda.png";
+                break;
+            default:
+                break;
         }
 
     }
-    
-   /* @Override
-    public void run(){
-        this.velocidadeCarro = (random.nextInt(1) + 1) * 1000;
-        System.out.println(this.toString());
-        while(true){
-        try {   
-        if(quantidadeCarros < conCarro.getQtdCarro())
-        conCarro.iniciarCarro();
-        quantidadeCarros ++;
-            
-                sleep(velocidadeCarro);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Carro.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-    */
+
 }

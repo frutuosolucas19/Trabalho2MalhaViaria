@@ -13,7 +13,7 @@ import model.Carro;
 public class CarroTeste extends Thread{
     private Carro car;
     private int contador;
-    private int velocidade = 1000;
+    private int velocidade = 300;
 
     public void setVelocidade(int velocidade) {
         this.velocidade = velocidade;
@@ -52,14 +52,14 @@ public class CarroTeste extends Thread{
                             numRand = 0;
                         }
                     }
-                    this.car.getPosicaoAtual().getProxEstrada().get(numRand).adicionarCarroEstrada(car);
+                    this.car.getPosicaoAtual().getProxEstrada().get(numRand).adicionarCarro(car);
                     this.car.getPosicaoAtual().removerCarro();
                     this.car.setPosicaoVelha(this.car.getPosicaoAtual());
                     this.car.setPosicaoAtual(this.car.getPosicaoAtual().getProxEstrada().get(numRand));
                     this.car.setProxSentido(numRand);
 
                 } else {
-                    this.car.getPosicaoAtual().getProxEstrada().get(0).adicionarCarroEstrada(car);
+                    this.car.getPosicaoAtual().getProxEstrada().get(0).adicionarCarro(car);
                     this.car.getPosicaoAtual().removerCarro();
                     this.car.setPosicaoVelha(this.car.getPosicaoAtual());
                     this.car.setPosicaoAtual(this.car.getPosicaoAtual().getProxEstrada().get(0));

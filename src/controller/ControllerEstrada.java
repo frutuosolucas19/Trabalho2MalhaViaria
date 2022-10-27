@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import model.Carro;
 import model.Estrada;
 import model.MalhaViaria;
+import model.Monitor;
 
 /**
  *
@@ -47,11 +48,11 @@ public class ControllerEstrada {
         matrizEstrada = new Estrada[malhaViaria.getLinha()][malhaViaria.getColuna()];
         for (int i = 0; i < malhaViaria.getLinha(); i++) {
             for (int j = 0; j < malhaViaria.getColuna(); j++) {
-                Estrada estrada;
+                Monitor monitor;
                  if (malhaViaria.getMatriz()[i][j] != 0) {
-                     estrada = new Estrada(malhaViaria.getMatriz()[i][j], i, j);
-                     matrizEstrada[i][j] = estrada;
-                     sentidoCarro(estrada);
+                     monitor = new Monitor(malhaViaria.getMatriz()[i][j], i, j  );
+                     matrizEstrada[i][j] = monitor;
+                     sentidoCarro(monitor);
                  }else{
                      matrizEstrada[i][j] = null;
                  }
@@ -157,7 +158,7 @@ public class ControllerEstrada {
     }
     
     public void definirCarro(Estrada estrada){
-        estrada.adicionarCarroEstrada(retornaCarro(estrada));
+        estrada.adicionarCarro(retornaCarro(estrada));
     }
     
      public Carro retornaCarro(Estrada estrada) {
